@@ -13,7 +13,7 @@ app.get('/',(req,res)=>{
 
 async function startApp(){
     try{
-        await mongoose.connect(DB_URL)
+        await mongoose.connect(DB_URL, {useUnifiedTopology: true, useNewUrlParser: true})
         app.listen(PORT, ()=>{
             console.log("server is run")
         })
@@ -21,4 +21,6 @@ async function startApp(){
         console.log(e)
     }
 }
+
+startApp()
 
