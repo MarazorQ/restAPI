@@ -1,22 +1,14 @@
 import express from "express"
 import mongoose from "mongoose"
 import Post from "./Post.js"
+import router from "./router.js"
 
 const DB_URL = `mongodb+srv://user:user@cluster0.svz2w.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`
 const PORT = 5000
 
 const app = express()
 app.use(express.json())
-
-app.post('/', async (req,res)=>{
-    try{
-        const {title, content, author} = req.body// дисттруктуризация
-        const post = await Post.create({title, content, author})
-        res.json(post)
-    }catch (e){
-        res.status(500).json(e)
-    }
-})
+app.use('/api', router)
 
 async function startApp(){
     try{
