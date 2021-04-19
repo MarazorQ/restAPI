@@ -7,8 +7,16 @@ const DB_URL = `mongodb+srv://user:user@cluster0.svz2w.mongodb.net/myFirstDataba
 const PORT = 5000
 
 const app = express()
+// разрешаем доступ к серваку для клиента
+let allowCrossDomain = function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', "*");
+    res.header('Access-Control-Allow-Headers', "*");
+    next();
+  }
+app.use(allowCrossDomain);
 app.use(express.json())
 app.use('/api', router)
+
 
 async function startApp(){
     try{
