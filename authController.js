@@ -1,10 +1,16 @@
 import Users from "./Users.js"
 import Role from "./Role.js"
 import bcrypt from 'bcryptjs'
+import {validationResult} from "express-validator"
 
 class authController{
     async registration(req, res){
         try{
+            const err = validationResult(req)
+            if (!err.isEmpty()){
+                return res.status(400).json({message: "Error", err})
+            }
+            
             const {username, password} = req.body
             const candidate = await Users.findOne({username})
 
@@ -19,7 +25,7 @@ class authController{
 
             const user = new Users({username, password: hashPassword, roles: [userRole.value]})
             await user.save()
-            
+
             return res.json({message: "Reg sacs!"})
         }catch (e){
             console.log(e)
