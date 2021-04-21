@@ -60,6 +60,6 @@ async function DELEte(){
   }
 }
 
-DELEte()
+//DELEte()
 //POSt();
-//Get()
+Get()

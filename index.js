@@ -1,8 +1,8 @@
 import express from "express"
 import mongoose from "mongoose"
-import Post from "./Post.js"
-import router from "./router.js"
-import authRouter from "./authRouter.js"
+import Post from "./model/Post.js"
+import router from "./router/router.js"
+import authRouter from "./router/authRouter.js"
 
 const DB_URL = `mongodb+srv://user:user@cluster0.svz2w.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`
 const PORT = 5000
