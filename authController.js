@@ -1,3 +1,6 @@
+import Users from "./Users.js"
+import Role from "./Role.js"
+
 class authController{
     async registration(req, res){
         try{
@@ -15,7 +18,7 @@ class authController{
     }
     async getUsers(req, res){
         try{
-
+            res.json("get users")
         }catch (e){
             
         }
