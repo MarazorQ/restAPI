@@ -2,6 +2,18 @@ import Users from "./Users.js"
 import Role from "./Role.js"
 import bcrypt from 'bcryptjs'
 import {validationResult} from "express-validator"
+import jwt from "jsonwebtoken"
+
+
+
+const generateTocken = (id, roles) =>{
+    const secret = "SEC"
+    const payload = {
+        id,
+        roles
+    }
+    return jwt.sign(payload, secret, {expiresIn: "24h"})
+}
 
 class authController{
     async registration(req, res){
@@ -10,7 +22,7 @@ class authController{
             if (!err.isEmpty()){
                 return res.status(400).json({message: "Error", err})
             }
-            
+
             const {username, password} = req.body
             const candidate = await Users.findOne({username})
 
@@ -34,7 +46,17 @@ class authController{
     }
     async login(req, res){
         try{
-
+            const {username, password} = req.body
+            const user = await Users.findOne({username})
+            if (!user){
+                return res.status(400).json({message: `User ${username} cant search`})
+            }
+            const validPassword = bcrypt.compareSync(password, user.password)
+            if (!validPassword){
+                res.status(400).json({message: "Neverni parol"})
+            }
+            const token = generateTocken(user._id, user.roles)
+            return res.json({token})
         }catch (e){
             console.log(e)
             res.status(400).json({message: "Log err"})
