@@ -2,6 +2,7 @@ import express from "express"
 import mongoose from "mongoose"
 import Post from "./Post.js"
 import router from "./router.js"
+import authRouter from "./authRouter.js"
 
 const DB_URL = `mongodb+srv://user:user@cluster0.svz2w.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`
 const PORT = 5000
@@ -16,6 +17,7 @@ let allowCrossDomain = function(req, res, next) {
 app.use(allowCrossDomain);
 app.use(express.json())
 app.use('/api', router)
+app.use('auth', authRouter)
 
 
 async function startApp(){
