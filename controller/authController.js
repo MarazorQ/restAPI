@@ -1,5 +1,5 @@
-import Users from "./Users.js"
-import Role from "./Role.js"
+import Users from "../model/Users.js"
+import Role from "../model/Role.js"
 import bcrypt from 'bcryptjs'
 import {validationResult} from "express-validator"
 import jwt from "jsonwebtoken"

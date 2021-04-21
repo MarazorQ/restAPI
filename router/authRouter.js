@@ -1,4 +1,4 @@
-import authController from "./authController.js"
+import authController from "../controller/authController.js"
 import Router from "express"
 import {check} from "express-validator"
 
